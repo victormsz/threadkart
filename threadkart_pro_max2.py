@@ -12,7 +12,6 @@ CAR_Y_BASE = 290  # Altura base pros carros
 VERTICAL_SPACING = 35  # Distância entre os carros
 PitStop = []
 waitTimes = []
-
 class corredor(thr.Thread):
     def __init__(self, nome, velocidade, poder, competidores, update_queue, index, manager):
         thr.Thread.__init__(self)
@@ -71,7 +70,7 @@ class corredor(thr.Thread):
                 if self.estado != 4:
                     self.trajeto += self.velocidade + rnd.randrange(-2, 2)
                 self.update_queue.put((self.nome, self.trajeto, self.index, self.estado))  # Atualiza posição e estado na fila
-                time.sleep(0.5)
+                time.sleep(0.1)
                 print(f'{self.trajeto}m - {self.nome}')
                 if self.trajeto >= 500:
                     vencedor = self.nome
@@ -139,6 +138,9 @@ class PitStopManager(thr.Thread):
         self.strategy = strategy  # Estrategia de pit stop: "FCFS" ou "SJF"
         self.running = True  # Controle para parar a thread
         self.condition = thr.Condition()  # Para sincronização
+        self.maximum = 0  # Tempo máximo de espera
+        self.minimum = 0  # Tempo mínimo de espera
+        self.avarage = 0  # Tempo médio de espera
 
     def run(self):
         #Executa a estratégia escolhida em uma thread separada.
@@ -199,12 +201,16 @@ class PitStopManager(thr.Thread):
         if self.waitTimes:  # Verifica se há tempos de espera registrados
             self.waitTimes.sort()
             print("Minimum wait time:", self.waitTimes[0])
+            self.minimum = self.waitTimes[0]
             self.waitTimes.sort(reverse=True)
             print("Maximum wait time:", self.waitTimes[0])
+            self.maximum = self.waitTimes[0]
             avgTime = sum(self.waitTimes) / len(self.waitTimes)
+            self.avarage= avgTime
             print("Average wait time:", avgTime)
 
 class PowerUpManager(thr.Thread):
+    
     def __init__(self, cars, strategy="SB", max_count=3):
         super().__init__()
         self.cars = cars  # Lista de carros que podem receber power-ups
@@ -269,22 +275,27 @@ class PowerUpManager(thr.Thread):
 # Função principal
 def main():
     pygame.init()
+    clock = pygame.time.Clock()
+    running = True
+    """
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("SUPER THREADKART")
 
     background_speed = 8
     title_image = load_title('title.png')
-    clock = pygame.time.Clock()
-    running = True
+
 
     # Carrega o fundo e define as posições iniciais
     background_image = load_background('background.png')
     background_x1 = 0
     background_x2 = WIDTH
+    
+    #carrega as caixas de texto
+    #display_pit_stop_manager()
 
     # Carrega os frames de animação dos carros e rotação
     car1_frames = load_car_frames('mario{}.png', 2)  # Carro 1 tem 2 frames de animação
-    car2_frames = load_car_frames('luigi{}.png', 2)  # Carro 2 tem 2 frames de animação
+    car2_frames = load_car_frames('luigi{}.png', 2)  # Carro 2 tem 2 frames de animaçãos
     car3_frames = load_car_frames('peach{}.png', 2)  # Carro 3 tem 2 frames de animação
     car4_frames = load_car_frames('bowser{}.png', 2)  # Carro 1 tem 2 frames de animação
     car5_frames = load_car_frames('toad{}.png', 2)  # Carro 2 tem 2 frames de animação
@@ -319,7 +330,7 @@ def main():
     carros_rot_animados = [car1_rot_frames, car2_rot_frames, car3_rot_frames, car4_rot_frames, car5_rot_frames, car6_rot_frames, car7_rot_frames]
     carros_tartaruga_animados = [car1_tartaruga_frames, car2_tartaruga_frames, car3_tartaruga_frames, car4_tartaruga_frames, car5_tartaruga_frames, car6_tartaruga_frames, car7_tartaruga_frames]  
     carros_lakitu_animados = [car1_lakitu_frames, car2_lakitu_frames, car3_lakitu_frames, car4_lakitu_frames, car5_lakitu_frames, car6_lakitu_frames, car7_lakitu_frames]    
-    
+    """
     # Inicializa a fila de atualizações
     update_queue = queue.Queue()
     car_positions = [0, 0, 0, 0, 0, 0, 0]  # Posições iniciais dos carros
@@ -411,6 +422,7 @@ def main():
         frame_counter += 1
 
         # Ele vai atualizar o frame do carro a cada 5 frames do jogo
+        """
         if frame_counter % 5 == 0:
             for i in range(len(current_frames)):
                 # Escolhe a animação se ele estiver normal ou rodando
@@ -442,12 +454,44 @@ def main():
 
         # Desenha a corrida na tela
         draw_race(screen, carros_animados, carros_rot_animados, carros_tartaruga_animados, carros_lakitu_animados, car_positions, current_frames, car_offsets, car_states)
-        clock.tick(30)  # Limita a 30 FPS
-
+        #clock.tick(30)  # Limita a 30 FPS
+            """
     pit_stop_manager.stop()
     pit_stop_manager.join()  # Espera a thread terminar antes de sair
     power_up_manager.stop()
     power_up_manager.join()
+    # Cria um arquivo txt com algumas informações
+    
+# Inicializa o ID da partida
+    id_partida = 1  # Valor inicial, caso o arquivo não exista
+
+    try:
+        with open('resultados.txt', 'r') as f:
+            lines = f.readlines()
+            if lines:  # Verifica se há linhas no arquivo
+                # Verifica a linha que contém o ID da partida
+                for line in reversed(lines):
+                    if line.startswith('ID da partida:'):
+                        id_partida = int(line.split(':')[-1].strip()) + 1
+                        break  # Para após encontrar o ID
+    except FileNotFoundError:
+        # Se o arquivo não existir, o ID inicial já está definido como 1
+        pass
+    except ValueError as e:
+        print(f"Erro ao converter ID: {e}")
+
+    with open('resultados.txt', 'a') as f:
+        f.write(f'ID da partida: {id_partida}\n')
+        f.write(f'Vencedor: {vencedor}\n')
+        f.write(f'Método de pitstop: {pit_stop_manager.strategy}\n')
+        f.write(f'Método de powerup: {power_up_manager.strategy}\n')
+        f.write(f'minimum wait time: {pit_stop_manager.minimum}\n')
+        f.write(f'maximum wait time: {pit_stop_manager.maximum}\n')
+        f.write(f'average wait time: {pit_stop_manager.avarage}\n')
+        for car in cars:
+            f.write(f'{car.nome} - {car.trajeto}m\n')
+        f.write('\n')
+            
     pygame.quit()
 
 if __name__ == "__main__":

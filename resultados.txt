@@ -1,0 +1,170 @@
+ID da partida: 1
+Vencedor: SONIC
+Método de pitstop: FCFS
+Método de powerup: SC
+MARIO - 477m
+LUIGI - 369m
+PEACH - 414m
+BOWSER - 218m
+TOAD - 172m
+SONIC - 502m
+TROPA - 399m
+
+ID da partida: 2
+Vencedor: LUIGI
+Método de pitstop: FCFS
+Método de powerup: SC
+ID da partida: 3
+Vencedor: PEACH
+Método de pitstop: FCFS
+Método de powerup: SC
+ID da partida: 4
+Vencedor: LUIGI
+Método de pitstop: FCFS
+Método de powerup: SC
+minimum wait time: 0
+maximum wait time: 0
+average wait time: 0
+MARIO - 368m
+LUIGI - 503m
+PEACH - 412m
+BOWSER - 310m
+TOAD - 323m
+SONIC - 484m
+TROPA - 319m
+
+ID da partida: 5
+Vencedor: PEACH
+Método de pitstop: FCFS
+Método de powerup: SC
+minimum wait time: 0
+maximum wait time: 0
+average wait time: 0
+MARIO - 244m
+LUIGI - 271m
+PEACH - 503m
+BOWSER - 132m
+TOAD - 243m
+SONIC - 345m
+TROPA - 202m
+
+ID da partida: 6
+Vencedor: PEACH
+Método de pitstop: FCFS
+Método de powerup: SC
+minimum wait time: 0.00019288063049316406
+maximum wait time: 0.00019288063049316406
+average wait time: 0.00019288063049316406
+MARIO - 350m
+LUIGI - 351m
+PEACH - 503m
+BOWSER - 180m
+TOAD - 199m
+SONIC - 392m
+TROPA - 224m
+
+ID da partida: 7
+Vencedor: PEACH
+Método de pitstop: FCFS
+Método de powerup: SC
+minimum wait time: 0.0020890235900878906
+maximum wait time: 0.0020890235900878906
+average wait time: 0.0020890235900878906
+MARIO - 249m
+LUIGI - 320m
+PEACH - 506m
+BOWSER - 200m
+TOAD - 291m
+SONIC - 318m
+TROPA - 218m
+
+ID da partida: 8
+Vencedor: PEACH
+Método de pitstop: FCFS
+Método de powerup: SC
+minimum wait time: 0.021854877471923828
+maximum wait time: 0.021854877471923828
+average wait time: 0.021854877471923828
+MARIO - 352m
+LUIGI - 358m
+PEACH - 500m
+BOWSER - 277m
+TOAD - 300m
+SONIC - 441m
+TROPA - 217m
+
+ID da partida: 9
+Vencedor: LUIGI
+Método de pitstop: FCFS
+Método de powerup: SC
+minimum wait time: 0.0008571147918701172
+maximum wait time: 0.0008571147918701172
+average wait time: 0.0008571147918701172
+MARIO - 65m
+LUIGI - 500m
+PEACH - 150m
+BOWSER - 112m
+TOAD - 99m
+SONIC - 153m
+TROPA - 93m
+
+ID da partida: 10
+Vencedor: PEACH
+Método de pitstop: FCFS
+Método de powerup: SC
+minimum wait time: 0.0008459091186523438
+maximum wait time: 0.3922920227050781
+average wait time: 0.13274661699930826
+MARIO - 308m
+LUIGI - 340m
+PEACH - 502m
+BOWSER - 202m
+TOAD - 288m
+SONIC - 170m
+TROPA - 328m
+
+ID da partida: 11
+Vencedor: PEACH
+Método de pitstop: FCFS
+Método de powerup: SC
+minimum wait time: 0.0002739429473876953
+maximum wait time: 1.3974828720092773
+average wait time: 0.5045466899871827
+MARIO - 136m
+LUIGI - 300m
+PEACH - 501m
+BOWSER - 157m
+TOAD - 294m
+SONIC - 350m
+TROPA - 322m
+
+ID da partida: 12
+Vencedor: MARIO
+Método de pitstop: FCFS
+Método de powerup: SC
+minimum wait time: 0.004962921142578125
+maximum wait time: 4.900238990783691
+average wait time: 3.403258204460144
+MARIO - 501m
+LUIGI - 460m
+PEACH - 393m
+BOWSER - 112m
+TOAD - 222m
+SONIC - 284m
+TROPA - 157m
+
+ID da partida: 13
+Vencedor: PEACH
+Método de pitstop: FCFS
+Método de powerup: SC
+minimum wait time: 0.014358997344970703
+maximum wait time: 2.9732699394226074
+average wait time: 1.8839235782623291
+MARIO - 327m
+LUIGI - 274m
+PEACH - 506m
+BOWSER - 130m
+TOAD - 189m
+SONIC - 194m
+TROPA - 306m
+
