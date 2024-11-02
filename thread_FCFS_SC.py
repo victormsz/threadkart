@@ -70,7 +70,7 @@ class corredor(thr.Thread):
                 if self.estado != 4:
                     self.trajeto += self.velocidade + rnd.randrange(-2, 2)
                 self.update_queue.put((self.nome, self.trajeto, self.index, self.estado))  # Atualiza posição e estado na fila
-                time.sleep(0.1)
+                time.sleep(0.01)
                 print(f'{self.trajeto}m - {self.nome}')
                 if self.trajeto >= 500:
                     vencedor = self.nome
@@ -202,11 +202,14 @@ class PitStopManager(thr.Thread):
             self.waitTimes.sort()
             print("Minimum wait time:", self.waitTimes[0])
             self.minimum = self.waitTimes[0]
+            self.minimum = self.minimum * 100
             self.waitTimes.sort(reverse=True)
             print("Maximum wait time:", self.waitTimes[0])
             self.maximum = self.waitTimes[0]
+            self.maximum = self.maximum * 100
             avgTime = sum(self.waitTimes) / len(self.waitTimes)
             self.avarage= avgTime
+            self.avarage = self.avarage * 100
             print("Average wait time:", avgTime)
 
 class PowerUpManager(thr.Thread):
@@ -485,9 +488,9 @@ def main():
         f.write(f'Vencedor: {vencedor}\n')
         f.write(f'Método de pitstop: {pit_stop_manager.strategy}\n')
         f.write(f'Método de powerup: {power_up_manager.strategy}\n')
-        f.write(f'minimum wait time: {pit_stop_manager.minimum}\n')
-        f.write(f'maximum wait time: {pit_stop_manager.maximum}\n')
-        f.write(f'average wait time: {pit_stop_manager.avarage}\n')
+        f.write(f'minimum wait time(ms): {pit_stop_manager.minimum}\n')
+        f.write(f'maximum wait time(ms): {pit_stop_manager.maximum}\n')
+        f.write(f'average wait time(ms): {pit_stop_manager.avarage}\n')
         for car in cars:
             f.write(f'{car.nome} - {car.trajeto}m\n')
         f.write('\n')
